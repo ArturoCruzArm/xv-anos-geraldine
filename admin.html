@@ -285,19 +285,31 @@
 
             <!-- Paquete Fotográfico -->
             <div class="admin-section">
-                <h2>📸 Paquete Fotográfico</h2>
+                <h2>📸 Paquete Fotográfico y Pagos</h2>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Precio Base ($)</label>
+                        <label>Fotografía y Video ($)</label>
                         <input type="number" id="packagePrice" value="6000" min="0">
                     </div>
+                    <div class="form-group">
+                        <label>Servicio de Dron ($)</label>
+                        <input type="number" id="packageDrone" value="500" min="0">
+                    </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group">
                         <label>Viáticos ($)</label>
                         <input type="number" id="packageViatics" value="500" min="0">
                     </div>
+                    <div class="form-group">
+                        <label>Anticipo Pagado ($)</label>
+                        <input type="number" id="depositPaid" value="1000" min="0">
+                    </div>
                 </div>
                 <div class="price-display">
-                    Total: $<span id="totalPrice">6500</span> MXN
+                    Subtotal: $<span id="subtotalPrice">7000</span> MXN<br>
+                    <span style="font-size: 14px; color: #4caf50;">Anticipo: -$<span id="depositDisplay">1000</span></span><br>
+                    <span style="font-weight: bold;">Saldo a Pagar: $<span id="totalPrice">6000</span> MXN</span>
                 </div>
             </div>
 
@@ -349,7 +361,9 @@
 
             // Actualizar precio total cuando cambian los valores
             document.getElementById('packagePrice').addEventListener('change', updateTotalPrice);
+            document.getElementById('packageDrone').addEventListener('change', updateTotalPrice);
             document.getElementById('packageViatics').addEventListener('change', updateTotalPrice);
+            document.getElementById('depositPaid').addEventListener('change', updateTotalPrice);
         });
 
         // Cargar configuración en los campos
@@ -375,7 +389,9 @@
                 String(EVENT_CONFIG.partyEndMinute).padStart(2, '0');
 
             document.getElementById('packagePrice').value = EVENT_CONFIG.package.price;
+            document.getElementById('packageDrone').value = EVENT_CONFIG.package.drone;
             document.getElementById('packageViatics').value = EVENT_CONFIG.package.viatics;
+            document.getElementById('depositPaid').value = EVENT_CONFIG.payments.deposit;
 
             document.getElementById('photographerName').value = EVENT_CONFIG.contact.photographer;
             document.getElementById('photographerPhone').value = EVENT_CONFIG.contact.phone;
@@ -412,7 +428,11 @@
                 EVENT_CONFIG.partyEndMinute = parseInt(partyEnd[1]);
 
                 EVENT_CONFIG.package.price = parseInt(document.getElementById('packagePrice').value);
+                EVENT_CONFIG.package.drone = parseInt(document.getElementById('packageDrone').value);
                 EVENT_CONFIG.package.viatics = parseInt(document.getElementById('packageViatics').value);
+                EVENT_CONFIG.payments.deposit = parseInt(document.getElementById('depositPaid').value);
+                EVENT_CONFIG.payments.subtotal = EVENT_CONFIG.package.price + EVENT_CONFIG.package.drone + EVENT_CONFIG.package.viatics;
+                EVENT_CONFIG.payments.balance = EVENT_CONFIG.payments.subtotal - EVENT_CONFIG.payments.deposit;
 
                 EVENT_CONFIG.contact.photographer = document.getElementById('photographerName').value;
                 EVENT_CONFIG.contact.phone = document.getElementById('photographerPhone').value;
@@ -433,9 +453,14 @@
         // Actualizar precio total
         function updateTotalPrice() {
             const price = parseInt(document.getElementById('packagePrice').value) || 0;
+            const drone = parseInt(document.getElementById('packageDrone').value) || 0;
             const viatics = parseInt(document.getElementById('packageViatics').value) || 0;
-            const total = price + viatics;
-            document.getElementById('totalPrice').textContent = total.toLocaleString();
+            const deposit = parseInt(document.getElementById('depositPaid').value) || 0;
+            const subtotal = price + drone + viatics;
+            const balance = subtotal - deposit;
+            document.getElementById('subtotalPrice').textContent = subtotal.toLocaleString();
+            document.getElementById('depositDisplay').textContent = deposit.toLocaleString();
+            document.getElementById('totalPrice').textContent = balance.toLocaleString();
         }
 
         // Exportar configuración
