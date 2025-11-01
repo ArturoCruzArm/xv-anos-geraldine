@@ -47,10 +47,11 @@ const EVENT_CONFIG = {
 
     // Paquete fotográfico
     package: {
-        name: "PAQUETE COMPLETO DE FOTOGRAFÍA, VIDEO Y DRON",
+        name: "PAQUETE COMPLETO DE FOTOGRAFÍA, VIDEO, DRON E INVITACIÓN WEB",
         price: 6000,
         drone: 500,
         viatics: 500,
+        webInvitation: 500,
         currency: "MXN",
         includes: [
             "Cobertura por Sesión, Misa y 5 horas de Fiesta",
@@ -58,6 +59,7 @@ const EVENT_CONFIG = {
             "1 Película USB EN 4K con duración de 3:00 hrs editada musicalizada y titulada 📹",
             "1 Videoclip para Proyectar en el salón + fotos del recuerdo",
             "Cobertura con Dron 4K - Videos aéreos de la ceremonia y fiesta 🚁",
+            "Invitación Web Personalizada - Sitio elegante para compartir 🌐",
             "1 Caja Impresa para la USB",
             "1 Foto Ampliada A 50x60 cm con Marco",
             "1 Caja Impresa para Las Fotografías",
@@ -67,9 +69,9 @@ const EVENT_CONFIG = {
 
     // Pagos
     payments: {
-        subtotal: 7000,
+        subtotal: 7500,
         deposit: 1000,
-        balance: 6000,
+        balance: 6500,
         currency: "MXN"
     },
 
