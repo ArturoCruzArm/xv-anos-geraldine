@@ -70,8 +70,8 @@ const EVENT_CONFIG = {
     // Pagos
     payments: {
         subtotal: 7500,
-        deposit: 1000,
-        balance: 6500,
+        deposit: 2000,
+        balance: 5500,
         currency: "MXN"
     },
 
