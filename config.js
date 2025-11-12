@@ -3,9 +3,11 @@
 
 const EVENT_CONFIG = {
     // Información de la quinceañera
-    quinceaneraName: "Geraldine Guadalupe Villegas",
+    quinceaneraName: "Geraldine Guadalupe Méndez Villegas",
+    quinceaneraShortName: "Geral",
     quinceaneraAge: 15,
-    motherName: "Elida Villegas",
+    motherName: "Elida Villegas Hernández",
+    fatherName: "José Víctor Manuel Méndez Rayas",
     dressColor: "#D4AF37", // Dorado
 
     // Información del evento
@@ -13,14 +15,17 @@ const EVENT_CONFIG = {
     eventDateISO: "2025-12-31",
 
     // Ceremonia religiosa
-    ceremonyLocation: "Parroquia Principal de Nuestra Señora de los Dolores",
+    ceremonyLocation: "Parroquia de Nuestra Señora de los Dolores",
+    ceremonyAddress: "Calle Querétaro 1, Centro, 37800 Dolores Hidalgo Cuna de la Independencia Nacional, Gto., México",
     ceremonyCity: "Dolores Hidalgo, Guanajuato",
     ceremonyTime: "2:00 PM",
     ceremonyHour: 14,
     ceremonyMinute: 0,
+    ceremonyMapsUrl: "https://maps.google.com/?q=Parroquia+de+Nuestra+Señora+de+los+Dolores,Calle+Querétaro+1,Centro,37800+Dolores+Hidalgo",
 
     // Fiesta
-    partyLocation: "Salón El Jardín de Aurora",
+    partyLocation: "Jardín de la Aurora",
+    partyAddress: "Prolongación Baja California Norte 61, Centro, 37800 Dolores Hidalgo Cuna de la Independencia Nacional, Gto., México",
     partyDistance: "A 5 minutos de la Parroquia",
     partyStartTime: "4:00 PM",
     partyStartHour: 16,
@@ -28,6 +33,38 @@ const EVENT_CONFIG = {
     partyEndTime: "11:00 PM",
     partyEndHour: 23,
     partyEndMinute: 0,
+    partyMapsUrl: "https://maps.google.com/?q=Jardín+de+la+Aurora,Prolongación+Baja+California+Norte+61,Centro,37800+Dolores+Hidalgo",
+
+    // Padrinos
+    padrinos: {
+        misa: {
+            names: "Amapola Cortez y Moisés Leon",
+            type: "Padrinos de Misa"
+        },
+        corona: {
+            name: "Elizabeth Juárez",
+            type: "Madrina de Corona"
+        },
+        brindis: {
+            name: "Diana Villegas",
+            type: "Madrina de Brindis"
+        },
+        muneca: {
+            name: "Jesús Méndez",
+            type: "Padrino de Muñeca"
+        },
+        regalo: {
+            name: "Areli Juárez",
+            type: "Madrina de Regalo Sorpresa"
+        }
+    },
+
+    // Música
+    backgroundMusic: {
+        enabled: true,
+        songName: "La petite fille de la mer (Remastered)",
+        songUrl: "" // Se agregará el archivo de audio
+    },
 
     // Entretenimiento
     entertainment: [
@@ -75,14 +112,16 @@ const EVENT_CONFIG = {
         currency: "MXN"
     },
 
-    // Información de contacto (Por definir)
+    // Información de contacto
     contact: {
-        photographer: "(Por definir)",
-        phone: "(Por definir)",
-        phoneWhatsApp: "", // Ej: "+52XXXXXXXXXX"
-        email: "(Por definir)",
+        photographer: "Mamá - Elida",
+        phone: "+52 418 145 4596",
+        phoneWhatsApp: "+52 418 145 4596",
+        phoneSecondary: "+52 899 679 6555",
+        email: "",
         website: "",
-        responseTime: "24 horas"
+        responseTime: "24 horas",
+        dressCode: "Elegante"
     },
 
     // Colores personalizados
