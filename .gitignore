@@ -23,3 +23,12 @@ node_modules/
 # Archivos sensibles (si los hay)
 config-local.js
 secrets.json
+
+# Fotos de sesión (muy pesadas para Git)
+fotos-sesion/
+fotos-webp/
+
+# Archivos temporales de Python
+__pycache__/
+*.pyc
+*.pyo
