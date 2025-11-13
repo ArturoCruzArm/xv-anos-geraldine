@@ -24,9 +24,11 @@ node_modules/
 config-local.js
 secrets.json
 
-# Fotos de sesión (muy pesadas para Git)
+# Fotos originales JPG (muy pesadas para Git)
 fotos-sesion/
-fotos-webp/
+
+# Las fotos WebP SÍ se suben (optimizadas para web)
+# fotos-webp/ - COMENTADO para permitir subir
 
 # Archivos temporales de Python
 __pycache__/
