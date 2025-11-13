@@ -188,6 +188,65 @@ body::before {
     to { transform: rotate(360deg); }
 }
 
+/* Foto de portada principal */
+.cover-photo-container {
+    width: 280px;
+    height: 280px;
+    margin: 0 auto var(--space-lg);
+    position: relative;
+    opacity: 0;
+    animation: fadeInScale 1s ease-out 0.4s forwards;
+}
+
+.cover-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid var(--gold);
+    box-shadow:
+        0 8px 32px rgba(212, 175, 55, 0.5),
+        0 0 0 10px rgba(212, 175, 55, 0.1),
+        inset 0 0 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 2;
+    transition: all var(--transition-slow);
+}
+
+.cover-photo-container::before {
+    content: '';
+    position: absolute;
+    inset: -15px;
+    border-radius: 50%;
+    background: var(--gradient-gold-shine);
+    opacity: 0.3;
+    filter: blur(20px);
+    animation: pulse 3s ease-in-out infinite;
+    z-index: 1;
+}
+
+.cover-photo-container:hover .cover-photo {
+    transform: scale(1.05);
+    box-shadow:
+        0 12px 48px rgba(212, 175, 55, 0.7),
+        0 0 0 10px rgba(212, 175, 55, 0.2),
+        inset 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .cover-photo-container {
+        width: 220px;
+        height: 220px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cover-photo-container {
+        width: 180px;
+        height: 180px;
+    }
+}
+
 /* Etiqueta de invitación */
 .invitation-label {
     font-family: var(--font-elegant);
