@@ -573,6 +573,46 @@
             border: 2px solid rgba(243, 219, 143, 0.3);
         }
 
+        /* Imagen de Ampliación Grande */
+        .ampliacion-image-container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto 40px;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 12px 50px rgba(243, 219, 143, 0.5);
+            border: 4px solid var(--primary-gold);
+        }
+
+        .ampliacion-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .ampliacion-image-container:hover .ampliacion-image {
+            transform: scale(1.02);
+        }
+
+        .image-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(156, 39, 176, 0.95);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            border: 3px solid var(--primary-gold);
+            box-shadow: 0 4px 20px rgba(156, 39, 176, 0.6);
+            text-transform: uppercase;
+        }
+
         .ampliacion-description h3 {
             font-family: 'Playfair Display', serif;
             font-size: clamp(1.5rem, 3vw, 2rem);
@@ -674,6 +714,19 @@
                 padding: 20px;
             }
 
+            .ampliacion-image-container {
+                margin-bottom: 25px;
+                border: 3px solid var(--primary-gold);
+            }
+
+            .image-badge {
+                top: 10px;
+                right: 10px;
+                padding: 10px 15px;
+                font-size: 0.8rem;
+                letter-spacing: 1px;
+            }
+
             .edicion-details {
                 grid-template-columns: 1fr;
                 gap: 20px;
@@ -734,6 +787,12 @@
             </div>
 
             <div class="ampliacion-content">
+                <!-- Imagen Grande de Ampliación -->
+                <div class="ampliacion-image-container">
+                    <img src="fotos-webp/Ampliacion_Gera.webp" alt="Ampliación Profesional - Geraldine" class="ampliacion-image">
+                    <div class="image-badge">FOTO #001 - AMPLIACIÓN GRANDE</div>
+                </div>
+
                 <div class="ampliacion-description">
                     <h3>📸 Edición Profesional Aplicada</h3>
                     <p>En la edición profesional que se le realizó a la foto se aplicaron varios ajustes para resaltar la elegancia y calidad de una ampliación de quinceañera:</p>
