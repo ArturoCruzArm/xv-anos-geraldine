@@ -864,6 +864,8 @@
             Object.keys(counts).forEach(cat => {
                 document.getElementById(`count-${cat}`).textContent = counts[cat];
             });
+
+            return counts;
         }
 
         // Filtros
@@ -904,7 +906,7 @@
                 const fotosCategoria = [];
                 photos.forEach((photo, index) => {
                     const selection = selections[photo.name];
-                    if (selection && selection[categoria]) {
+                    if (selection && selection.categories && selection.categories.includes(categoria)) {
                         fotosCategoria.push(index + 1);
                     }
                 });
@@ -915,6 +917,20 @@
                     mensaje += `   Total: ${fotosCategoria.length}\n\n`;
                 }
             });
+
+            // Agregar comentarios si hay
+            const fotosConComentarios = [];
+            photos.forEach((photo, index) => {
+                const selection = selections[photo.name];
+                if (selection && selection.notes && selection.notes.trim() !== '') {
+                    fotosConComentarios.push(`   📸 Foto #${index + 1}: ${selection.notes}`);
+                }
+            });
+
+            if (fotosConComentarios.length > 0) {
+                mensaje += `\n💬 COMENTARIOS Y EDICIONES:\n`;
+                mensaje += fotosConComentarios.join('\n') + '\n';
+            }
 
             mensaje += `\n📅 Generado el: ${new Date().toLocaleString('es-MX')}\n`;
 
