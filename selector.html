@@ -734,10 +734,12 @@
         // Variables globales
         // photos se carga desde photos_list.js
         let currentPhotoIndex = 0;
-        let selections = {};
+        // Cargar selecciones predeterminadas
+        let selections = typeof defaultSelections !== 'undefined' ? {...defaultSelections} : {};
         let activeFilter = 'all';
 
         // Las fotos se cargan automáticamente desde photos_list.js
+        console.log(`Selecciones predeterminadas cargadas: ${Object.keys(selections).length} fotos`);
 
         // Renderizar galería
         function renderGallery() {
@@ -990,5 +992,6 @@
 
     <!-- Lista de fotos -->
     <script src="photos_list.js"></script>
+    <script src="default_selections.js"></script>
 </body>
 </html>
