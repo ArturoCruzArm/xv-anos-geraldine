@@ -730,37 +730,12 @@
         });
 
         // Variables globales
-        let photos = [];
+        // photos se carga desde photos_list.js
         let currentPhotoIndex = 0;
         let selections = {};
         let activeFilter = 'all';
 
-        // Cargar fotos desde el directorio
-        async function loadPhotos() {
-            document.getElementById('loading').classList.add('active');
-
-            try {
-                // Aquí se cargarán las fotos del directorio fotos-webp
-                // Por ahora usaremos un array de ejemplo
-                const photoFiles = await fetch('get_photos.php') // O usar un método para listar archivos
-                    .catch(() => {
-                        // Si no hay servidor, usar lista manual
-                        return { ok: false };
-                    });
-
-                if (!photoFiles.ok) {
-                    // Lista manual de fotos - se generará automáticamente
-                    photos = [];
-                    // Las fotos se cargarán dinámicamente
-                }
-
-                renderGallery();
-            } catch (error) {
-                console.error('Error al cargar fotos:', error);
-            } finally {
-                document.getElementById('loading').classList.remove('active');
-            }
-        }
+        // Las fotos se cargan automáticamente desde photos_list.js
 
         // Renderizar galería
         function renderGallery() {
