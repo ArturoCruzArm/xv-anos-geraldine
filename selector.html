@@ -715,6 +715,55 @@
     </footer>
 
     <script>
+        // Verificar si se está accediendo desde GitHub Pages
+        if (window.location.hostname !== 'localhost' &&
+            window.location.hostname !== '127.0.0.1' &&
+            window.location.hostname !== '' &&
+            !window.location.protocol.startsWith('file:')) {
+
+            // Mostrar mensaje de error si se accede desde web
+            document.body.innerHTML = `
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-height: 100vh;
+                    background: linear-gradient(135deg, #480c1a 0%, #5c1427 100%);
+                    color: #f3db8f;
+                    font-family: Arial, sans-serif;
+                    text-align: center;
+                    padding: 20px;
+                ">
+                    <div style="
+                        max-width: 600px;
+                        background: rgba(255,255,255,0.1);
+                        padding: 40px;
+                        border-radius: 20px;
+                        border: 3px solid #f3db8f;
+                    ">
+                        <h1 style="font-size: 3rem; margin-bottom: 20px;">⚠️</h1>
+                        <h2 style="margin-bottom: 20px;">Selector Solo para Uso Local</h2>
+                        <p style="line-height: 1.8; margin-bottom: 20px;">
+                            Esta página <strong>NO funciona desde internet</strong> porque las fotos
+                            no están en GitHub Pages (son muy pesadas).
+                        </p>
+                        <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                            <p style="font-weight: bold; margin-bottom: 10px;">📂 Para usar el selector:</p>
+                            <ol style="text-align: left; line-height: 2;">
+                                <li>Ve a tu computadora</li>
+                                <li>Abre la carpeta:<br><code style="background: rgba(0,0,0,0.5); padding: 5px 10px; border-radius: 5px; display: inline-block; margin-top: 5px;">C:\\Users\\foro7\\xv-anos-geraldine\\</code></li>
+                                <li>Doble clic en <strong>selector.html</strong></li>
+                            </ol>
+                        </div>
+                        <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">
+                            Lee el archivo <strong>SELECTOR_README.md</strong> para más información
+                        </p>
+                    </div>
+                </div>
+            `;
+            throw new Error('Selector solo para uso local');
+        }
+
         // Deshabilitar clic derecho en todo el sitio
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
