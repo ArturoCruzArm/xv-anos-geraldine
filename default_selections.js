@@ -1,4 +1,10 @@
 const defaultSelections = {
+    "Ampliacion_Gera": {
+        "categories": [
+            "ampliacion"
+        ],
+        "notes": "GRANDE - Ampliación principal"
+    },
     "DSC_3003": {
         "categories": [
             "ampliacion"

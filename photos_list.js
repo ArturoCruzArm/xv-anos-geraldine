@@ -1,8 +1,13 @@
 // Lista de fotos generada automáticamente
-// Total de fotos: 258
+// Total de fotos: 259
 // Generado: 2025-11-13 (fotos descartadas eliminadas)
 
 const photos = [
+    {
+        "name": "Ampliacion_Gera",
+        "path": "fotos-webp/Ampliacion_Gera.webp",
+        "filename": "Ampliacion_Gera.webp"
+    },
     {
         "name": "DJI_20251109130307_0036_D",
         "path": "fotos-webp/DJI_20251109130307_0036_D.webp",
