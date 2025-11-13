@@ -41,6 +41,13 @@ def convert_to_webp(input_dir="fotos-sesion", output_dir="fotos-webp", quality=8
 
             # Abrir y convertir imagen
             with Image.open(jpg_path) as img:
+                # Corregir orientación EXIF si existe
+                try:
+                    from PIL import ImageOps
+                    img = ImageOps.exif_transpose(img)
+                except Exception:
+                    pass  # Si no hay datos EXIF, continuar sin rotación
+
                 # Convertir a RGB si es necesario
                 if img.mode in ("RGBA", "P"):
                     img = img.convert("RGB")
