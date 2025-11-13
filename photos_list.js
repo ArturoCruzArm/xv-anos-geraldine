@@ -1,6 +1,6 @@
 // Lista de fotos generada automáticamente
-// Total de fotos: 211
-// Generado: 2025-11-12 15:50:57
+// Total de fotos: 268
+// Generado: 2025-11-12 21:46:07
 
 const photos = [
     {
@@ -1057,6 +1057,291 @@ const photos = [
         "name": "DSC_3080",
         "path": "fotos-webp/DSC_3080.webp",
         "filename": "DSC_3080.webp"
+    },
+    {
+        "name": "IMG_4382",
+        "path": "fotos-webp/IMG_4382.webp",
+        "filename": "IMG_4382.webp"
+    },
+    {
+        "name": "IMG_4383",
+        "path": "fotos-webp/IMG_4383.webp",
+        "filename": "IMG_4383.webp"
+    },
+    {
+        "name": "IMG_4384",
+        "path": "fotos-webp/IMG_4384.webp",
+        "filename": "IMG_4384.webp"
+    },
+    {
+        "name": "IMG_4385",
+        "path": "fotos-webp/IMG_4385.webp",
+        "filename": "IMG_4385.webp"
+    },
+    {
+        "name": "IMG_4386",
+        "path": "fotos-webp/IMG_4386.webp",
+        "filename": "IMG_4386.webp"
+    },
+    {
+        "name": "IMG_4387",
+        "path": "fotos-webp/IMG_4387.webp",
+        "filename": "IMG_4387.webp"
+    },
+    {
+        "name": "IMG_4388",
+        "path": "fotos-webp/IMG_4388.webp",
+        "filename": "IMG_4388.webp"
+    },
+    {
+        "name": "IMG_4389",
+        "path": "fotos-webp/IMG_4389.webp",
+        "filename": "IMG_4389.webp"
+    },
+    {
+        "name": "IMG_4390",
+        "path": "fotos-webp/IMG_4390.webp",
+        "filename": "IMG_4390.webp"
+    },
+    {
+        "name": "IMG_4391",
+        "path": "fotos-webp/IMG_4391.webp",
+        "filename": "IMG_4391.webp"
+    },
+    {
+        "name": "IMG_4392",
+        "path": "fotos-webp/IMG_4392.webp",
+        "filename": "IMG_4392.webp"
+    },
+    {
+        "name": "IMG_4393",
+        "path": "fotos-webp/IMG_4393.webp",
+        "filename": "IMG_4393.webp"
+    },
+    {
+        "name": "IMG_4394",
+        "path": "fotos-webp/IMG_4394.webp",
+        "filename": "IMG_4394.webp"
+    },
+    {
+        "name": "IMG_4395",
+        "path": "fotos-webp/IMG_4395.webp",
+        "filename": "IMG_4395.webp"
+    },
+    {
+        "name": "IMG_4396",
+        "path": "fotos-webp/IMG_4396.webp",
+        "filename": "IMG_4396.webp"
+    },
+    {
+        "name": "IMG_4397",
+        "path": "fotos-webp/IMG_4397.webp",
+        "filename": "IMG_4397.webp"
+    },
+    {
+        "name": "IMG_4398",
+        "path": "fotos-webp/IMG_4398.webp",
+        "filename": "IMG_4398.webp"
+    },
+    {
+        "name": "IMG_4399",
+        "path": "fotos-webp/IMG_4399.webp",
+        "filename": "IMG_4399.webp"
+    },
+    {
+        "name": "IMG_4400",
+        "path": "fotos-webp/IMG_4400.webp",
+        "filename": "IMG_4400.webp"
+    },
+    {
+        "name": "IMG_4401",
+        "path": "fotos-webp/IMG_4401.webp",
+        "filename": "IMG_4401.webp"
+    },
+    {
+        "name": "IMG_4402",
+        "path": "fotos-webp/IMG_4402.webp",
+        "filename": "IMG_4402.webp"
+    },
+    {
+        "name": "IMG_4403",
+        "path": "fotos-webp/IMG_4403.webp",
+        "filename": "IMG_4403.webp"
+    },
+    {
+        "name": "IMG_4404",
+        "path": "fotos-webp/IMG_4404.webp",
+        "filename": "IMG_4404.webp"
+    },
+    {
+        "name": "IMG_4405",
+        "path": "fotos-webp/IMG_4405.webp",
+        "filename": "IMG_4405.webp"
+    },
+    {
+        "name": "IMG_4406",
+        "path": "fotos-webp/IMG_4406.webp",
+        "filename": "IMG_4406.webp"
+    },
+    {
+        "name": "IMG_4407",
+        "path": "fotos-webp/IMG_4407.webp",
+        "filename": "IMG_4407.webp"
+    },
+    {
+        "name": "IMG_4408",
+        "path": "fotos-webp/IMG_4408.webp",
+        "filename": "IMG_4408.webp"
+    },
+    {
+        "name": "IMG_4409",
+        "path": "fotos-webp/IMG_4409.webp",
+        "filename": "IMG_4409.webp"
+    },
+    {
+        "name": "IMG_4410",
+        "path": "fotos-webp/IMG_4410.webp",
+        "filename": "IMG_4410.webp"
+    },
+    {
+        "name": "IMG_4411",
+        "path": "fotos-webp/IMG_4411.webp",
+        "filename": "IMG_4411.webp"
+    },
+    {
+        "name": "IMG_4412",
+        "path": "fotos-webp/IMG_4412.webp",
+        "filename": "IMG_4412.webp"
+    },
+    {
+        "name": "IMG_4413",
+        "path": "fotos-webp/IMG_4413.webp",
+        "filename": "IMG_4413.webp"
+    },
+    {
+        "name": "IMG_4414",
+        "path": "fotos-webp/IMG_4414.webp",
+        "filename": "IMG_4414.webp"
+    },
+    {
+        "name": "IMG_4415",
+        "path": "fotos-webp/IMG_4415.webp",
+        "filename": "IMG_4415.webp"
+    },
+    {
+        "name": "IMG_4416",
+        "path": "fotos-webp/IMG_4416.webp",
+        "filename": "IMG_4416.webp"
+    },
+    {
+        "name": "IMG_4417",
+        "path": "fotos-webp/IMG_4417.webp",
+        "filename": "IMG_4417.webp"
+    },
+    {
+        "name": "IMG_4418",
+        "path": "fotos-webp/IMG_4418.webp",
+        "filename": "IMG_4418.webp"
+    },
+    {
+        "name": "IMG_4419",
+        "path": "fotos-webp/IMG_4419.webp",
+        "filename": "IMG_4419.webp"
+    },
+    {
+        "name": "IMG_4420",
+        "path": "fotos-webp/IMG_4420.webp",
+        "filename": "IMG_4420.webp"
+    },
+    {
+        "name": "IMG_4421",
+        "path": "fotos-webp/IMG_4421.webp",
+        "filename": "IMG_4421.webp"
+    },
+    {
+        "name": "IMG_4422",
+        "path": "fotos-webp/IMG_4422.webp",
+        "filename": "IMG_4422.webp"
+    },
+    {
+        "name": "IMG_4423",
+        "path": "fotos-webp/IMG_4423.webp",
+        "filename": "IMG_4423.webp"
+    },
+    {
+        "name": "IMG_4424",
+        "path": "fotos-webp/IMG_4424.webp",
+        "filename": "IMG_4424.webp"
+    },
+    {
+        "name": "IMG_4425",
+        "path": "fotos-webp/IMG_4425.webp",
+        "filename": "IMG_4425.webp"
+    },
+    {
+        "name": "IMG_4426",
+        "path": "fotos-webp/IMG_4426.webp",
+        "filename": "IMG_4426.webp"
+    },
+    {
+        "name": "IMG_4427",
+        "path": "fotos-webp/IMG_4427.webp",
+        "filename": "IMG_4427.webp"
+    },
+    {
+        "name": "IMG_4428",
+        "path": "fotos-webp/IMG_4428.webp",
+        "filename": "IMG_4428.webp"
+    },
+    {
+        "name": "IMG_4429",
+        "path": "fotos-webp/IMG_4429.webp",
+        "filename": "IMG_4429.webp"
+    },
+    {
+        "name": "IMG_4430",
+        "path": "fotos-webp/IMG_4430.webp",
+        "filename": "IMG_4430.webp"
+    },
+    {
+        "name": "IMG_4431",
+        "path": "fotos-webp/IMG_4431.webp",
+        "filename": "IMG_4431.webp"
+    },
+    {
+        "name": "IMG_4432",
+        "path": "fotos-webp/IMG_4432.webp",
+        "filename": "IMG_4432.webp"
+    },
+    {
+        "name": "IMG_4433",
+        "path": "fotos-webp/IMG_4433.webp",
+        "filename": "IMG_4433.webp"
+    },
+    {
+        "name": "IMG_4434",
+        "path": "fotos-webp/IMG_4434.webp",
+        "filename": "IMG_4434.webp"
+    },
+    {
+        "name": "IMG_4435",
+        "path": "fotos-webp/IMG_4435.webp",
+        "filename": "IMG_4435.webp"
+    },
+    {
+        "name": "IMG_4436",
+        "path": "fotos-webp/IMG_4436.webp",
+        "filename": "IMG_4436.webp"
+    },
+    {
+        "name": "IMG_4437",
+        "path": "fotos-webp/IMG_4437.webp",
+        "filename": "IMG_4437.webp"
+    },
+    {
+        "name": "IMG_4438",
+        "path": "fotos-webp/IMG_4438.webp",
+        "filename": "IMG_4438.webp"
     }
 ];
 
