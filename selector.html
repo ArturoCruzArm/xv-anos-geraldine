@@ -569,7 +569,7 @@
                 <li>🗑️ <strong>Descartar</strong> - Fotos que no deseas usar</li>
             </ul>
             <p style="margin-top: 10px;"><strong>Nota:</strong> Si necesitas edición en alguna foto, especifícalo en el campo de comentarios.</p>
-            <p style="margin-top: 15px;"><strong><i class="fas fa-mobile-alt"></i> Importante:</strong> Cuando presiones <strong style="color: var(--primary-gold);">"Enviar Reporte"</strong>, se abrirá WhatsApp automáticamente con tu selección lista para enviar al <strong style="color: var(--primary-gold);">418-145-4596</strong></p>
+            <p style="margin-top: 15px;"><strong><i class="fas fa-mobile-alt"></i> Importante:</strong> Cuando presiones <strong style="color: var(--primary-gold);">"Enviar Reporte"</strong>, se abrirá WhatsApp automáticamente con tu selección lista para enviar al <strong style="color: var(--primary-gold);">477-920-3776</strong></p>
         </div>
     </header>
 
@@ -907,13 +907,18 @@
                 photos.forEach((photo, index) => {
                     const selection = selections[photo.name];
                     if (selection && selection.categories && selection.categories.includes(categoria)) {
-                        fotosCategoria.push(index + 1);
+                        fotosCategoria.push({
+                            numero: index + 1,
+                            nombre: photo.filename
+                        });
                     }
                 });
 
                 if (fotosCategoria.length > 0) {
                     mensaje += `${categorias[categoria]}:\n`;
-                    mensaje += `   Fotos: ${fotosCategoria.join(', ')}\n`;
+                    fotosCategoria.forEach(foto => {
+                        mensaje += `   • #${foto.numero} - ${foto.nombre}\n`;
+                    });
                     mensaje += `   Total: ${fotosCategoria.length}\n\n`;
                 }
             });
@@ -937,8 +942,8 @@
             // Codificar mensaje para URL
             const mensajeCodificado = encodeURIComponent(mensaje);
 
-            // Número de WhatsApp (Mamá Elida)
-            const whatsappURL = `https://wa.me/524181454596?text=${mensajeCodificado}`;
+            // Número de WhatsApp
+            const whatsappURL = `https://wa.me/524779203776?text=${mensajeCodificado}`;
 
             // Abrir WhatsApp
             window.open(whatsappURL, '_blank');
