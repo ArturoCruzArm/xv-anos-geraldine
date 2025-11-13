@@ -569,6 +569,7 @@
                 <li>🗑️ <strong>Descartar</strong> - Fotos que no deseas usar</li>
             </ul>
             <p style="margin-top: 10px;"><strong>Nota:</strong> Si necesitas edición en alguna foto, especifícalo en el campo de comentarios.</p>
+            <p style="margin-top: 15px;"><strong><i class="fas fa-mobile-alt"></i> Importante:</strong> Cuando presiones <strong style="color: var(--primary-gold);">"Enviar Reporte"</strong>, se abrirá WhatsApp automáticamente con tu selección lista para enviar al <strong style="color: var(--primary-gold);">418-145-4596</strong></p>
         </div>
     </header>
 
@@ -635,7 +636,7 @@
                     <i class="fas fa-trash"></i> Descartadas
                 </button>
                 <button class="btn btn-export" onclick="exportarSeleccion()">
-                    <i class="fas fa-download"></i> Exportar Selección
+                    <i class="fab fa-whatsapp"></i> Enviar Reporte
                 </button>
                 <button class="btn btn-clear" onclick="limpiarSeleccion()">
                     <i class="fas fa-eraser"></i> Limpiar Todo
@@ -877,26 +878,56 @@
 
         // Exportar selección
         function exportarSeleccion() {
-            const result = {
-                fecha: new Date().toISOString(),
-                evento: 'XV Años Geraldine Guadalupe Méndez Villegas',
-                selecciones: {}
+            const stats = updateStats();
+
+            // Crear mensaje de resumen
+            let mensaje = '👑 SELECCIÓN DE FOTOS - XV AÑOS GERALDINE\n';
+            mensaje += '═══════════════════════════════════════\n\n';
+            mensaje += `📊 RESUMEN GENERAL:\n`;
+            mensaje += `   Total de fotos: ${photos.length}\n`;
+            mensaje += `   🖼️  Para ampliación: ${stats.ampliacion}\n`;
+            mensaje += `   📸 Para impresión: ${stats.impresion}\n`;
+            mensaje += `   📱 Para redes sociales: ${stats.redes_sociales}\n`;
+            mensaje += `   🌐 Para invitaciones web: ${stats.invitaciones_web}\n`;
+            mensaje += `   ❌ Descartadas: ${stats.descartada}\n\n`;
+
+            // Detalles por categoría
+            const categorias = {
+                ampliacion: '🖼️  AMPLIACIÓN',
+                impresion: '📸 IMPRESIÓN',
+                redes_sociales: '📱 REDES SOCIALES',
+                invitaciones_web: '🌐 INVITACIONES WEB',
+                descartada: '❌ DESCARTADAS'
             };
 
-            Object.keys(selections).forEach(photoName => {
-                result.selecciones[photoName] = selections[photoName];
+            Object.keys(categorias).forEach(categoria => {
+                const fotosCategoria = [];
+                photos.forEach((photo, index) => {
+                    const selection = selections[photo.name];
+                    if (selection && selection[categoria]) {
+                        fotosCategoria.push(index + 1);
+                    }
+                });
+
+                if (fotosCategoria.length > 0) {
+                    mensaje += `${categorias[categoria]}:\n`;
+                    mensaje += `   Fotos: ${fotosCategoria.join(', ')}\n`;
+                    mensaje += `   Total: ${fotosCategoria.length}\n\n`;
+                }
             });
 
-            const json = JSON.stringify(result, null, 2);
-            const blob = new Blob([json], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `seleccion-fotos-geraldine-${new Date().toISOString().split('T')[0]}.json`;
-            a.click();
-            URL.revokeObjectURL(url);
+            mensaje += `\n📅 Generado el: ${new Date().toLocaleString('es-MX')}\n`;
 
-            alert('Selección exportada correctamente');
+            // Codificar mensaje para URL
+            const mensajeCodificado = encodeURIComponent(mensaje);
+
+            // Número de WhatsApp (Mamá Elida)
+            const whatsappURL = `https://wa.me/524181454596?text=${mensajeCodificado}`;
+
+            // Abrir WhatsApp
+            window.open(whatsappURL, '_blank');
+
+            alert('Abriendo WhatsApp para enviar tu selección...');
         }
 
         // Limpiar selección
