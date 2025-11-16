@@ -14,7 +14,7 @@ Sitio web elegante para la invitación y contrato del paquete fotográfico de lo
 
 ## 🎵 Entretenimiento
 
-- **5:00 PM - 6:00 PM:** Tecladista
+- **4:00 PM - 6:00 PM:** Tecladista
 - **6:00 PM - 11:00 PM:** Sonido "Fiesta Loca"
 
 ## ✨ Color del Vestido
