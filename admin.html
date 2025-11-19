@@ -359,6 +359,29 @@
         </div>
     </div>
 
+    <script>
+        // Deshabilitar clic derecho en todo el sitio
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Deshabilitar arrastrar imágenes
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Deshabilitar selección de imágenes
+        document.addEventListener('selectstart', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
     <script src="config.js"></script>
     <script>
         // Cargar configuración al abrir la página

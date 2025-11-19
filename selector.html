@@ -1012,6 +1012,14 @@
             }
         });
 
+        // Deshabilitar selección de imágenes
+        document.addEventListener('selectstart', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+                return false;
+            }
+        });
+
         // Variables globales
         // photos se carga desde photos_list.js
         let currentPhotoIndex = 0;
