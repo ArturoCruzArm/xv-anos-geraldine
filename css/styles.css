@@ -730,9 +730,9 @@ body::before {
 .video-container {
     position: relative;
     width: 100%;
-    max-width: 800px;
+    max-width: 540px; /* Ancho máximo para video vertical 9:16 */
     margin: 0 auto;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    padding-bottom: 177.78%; /* 9:16 aspect ratio para video vertical */
     height: 0;
     overflow: hidden;
     border-radius: 20px;
@@ -758,11 +758,18 @@ body::before {
 
 @media (max-width: 768px) {
     .video-container {
-        max-width: 100%;
+        max-width: 400px;
         border-radius: 15px;
     }
 
     .video-container iframe {
+        border-radius: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-container {
+        max-width: 100%;
         border-radius: 12px;
     }
 }

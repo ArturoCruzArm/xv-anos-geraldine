@@ -703,13 +703,13 @@
             font-size: 1.2rem;
         }
 
-        /* Video Container */
+        /* Video Container - Vertical 9:16 */
         .video-container-selector {
             position: relative;
             width: 100%;
-            max-width: 900px;
+            max-width: 540px; /* Ancho máximo para video vertical 9:16 */
             margin: 0 auto;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            padding-bottom: 177.78%; /* 9:16 aspect ratio para video vertical 1080x1920 */
             height: 0;
             overflow: hidden;
             border-radius: 20px;
@@ -741,11 +741,18 @@
             }
 
             .video-container-selector {
-                max-width: 100%;
+                max-width: 400px;
                 border-radius: 15px;
             }
 
             .video-container-selector iframe {
+                border-radius: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .video-container-selector {
+                max-width: 100%;
                 border-radius: 12px;
             }
 
