@@ -217,13 +217,7 @@
                 Revive los mejores momentos de la sesión fotográfica en el Templo Expiatorio de León
             </p>
             <div class="video-container">
-                <iframe
-                    src="https://www.youtube.com/embed/I7kC91YK5_Y?autoplay=1&mute=1&loop=1&playlist=I7kC91YK5_Y&controls=1&modestbranding=1&rel=0&showinfo=0"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                    loading="lazy">
-                </iframe>
+                <div id="youtube-player-geraldine"></div>
             </div>
         </div>
     </section>
@@ -774,6 +768,54 @@
                 return false;
             }
         });
+    </script>
+
+    <!-- YouTube Player API -->
+    <script>
+        var playerGeraldine;
+
+        function onYouTubeIframeAPIReady() {
+            playerGeraldine = new YT.Player('youtube-player-geraldine', {
+                videoId: 'I7kC91YK5_Y',
+                playerVars: { 'autoplay': 1, 'mute': 1, 'loop': 1, 'playlist': 'I7kC91YK5_Y', 'controls': 1, 'modestbranding': 1, 'rel': 0, 'playsinline': 1 },
+                events: {
+                    'onReady': onPlayerGeraldineReady,
+                    'onStateChange': onPlayerGeraldineStateChange
+                }
+            });
+        }
+
+        function onPlayerGeraldineReady(event) {
+            var availableQualities = playerGeraldine.getAvailableQualityLevels();
+            if (availableQualities.indexOf('hd1080') !== -1) {
+                playerGeraldine.setPlaybackQuality('hd1080');
+            } else if (availableQualities.indexOf('hd720') !== -1) {
+                playerGeraldine.setPlaybackQuality('hd720');
+            } else if (availableQualities.indexOf('large') !== -1) {
+                playerGeraldine.setPlaybackQuality('large');
+            }
+        }
+
+        function onPlayerGeraldineStateChange(event) {
+            if (event.data == YT.PlayerState.PLAYING || event.data == YT.PlayerState.BUFFERING) {
+                var currentQuality = playerGeraldine.getPlaybackQuality();
+                if (currentQuality !== 'hd1080' && currentQuality !== 'hd720') {
+                    var availableQualities = playerGeraldine.getAvailableQualityLevels();
+                    if (availableQualities.indexOf('hd1080') !== -1) {
+                        playerGeraldine.setPlaybackQuality('hd1080');
+                    } else if (availableQualities.indexOf('hd720') !== -1) {
+                        playerGeraldine.setPlaybackQuality('hd720');
+                    }
+                }
+            }
+        }
+
+        if (!window.YT) {
+            var tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        }
     </script>
 </body>
 </html>
