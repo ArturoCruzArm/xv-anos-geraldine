@@ -38,8 +38,7 @@
 
     // Sync selections snapshot to Supabase (single row, foto_index=0)
     async function sbSync(sels) {
-        console.log('[sb] sbSync called, sbOk:', sbOk, 'sels keys:', Object.keys(sels));
-        if (!sbOk) { console.warn('[sb] sbSync skipped, sbOk=false'); return; }
+        if (!sbOk) return;
         try {
             var eid = await getEventoId();
             if (!eid) return;
@@ -70,7 +69,7 @@
                     code_version: 5
                 }])
             });
-        } catch(e) { console.warn('[sb] sbSync error:', e); sbOk = false; }
+        } catch(e) { sbOk = false; }
     }
 
     async function sbLoad(isPoll) {
@@ -128,7 +127,7 @@
                 sbRegistrarVisita();
                 mostrarBanner(merged);
             }
-        } catch(e) { console.warn('[sb] sbLoad error:', e); sbOk = false; }
+        } catch(e) { sbOk = false; }
     }
 
     async function sbRegistrarVisita() {
