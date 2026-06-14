@@ -1235,16 +1235,49 @@
         // Variables globales
         // photos se carga desde photos_list.js
         let currentPhotoIndex = 0;
-        // Cargar selecciones predeterminadas
         let selections = typeof defaultSelections !== 'undefined' ? {...defaultSelections} : {};
         const STORAGE_KEY = 'xv_geraldine';
-        // Cargar desde localStorage
+        const SESSION_STATE_KEY = 'xv_geraldine_state';
         try { var _saved = localStorage.getItem(STORAGE_KEY); if (_saved) selections = Object.assign(selections, JSON.parse(_saved)); } catch(e) {}
         function saveSelections() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(selections)); } catch(e) {} }
         let activeFilter = 'all';
 
-        // Las fotos se cargan automáticamente desde photos_list.js
-        console.log(`Selecciones predeterminadas cargadas: ${Object.keys(selections).length} fotos`);
+        // --- Memoria de sesión ---
+        function saveState() {
+            try {
+                var modal = document.getElementById('photoModal');
+                localStorage.setItem(SESSION_STATE_KEY, JSON.stringify({
+                    scrollY: window.scrollY,
+                    photoIndex: currentPhotoIndex,
+                    modalOpen: modal && modal.classList.contains('active'),
+                    filter: activeFilter,
+                    bannerDismissed: !document.getElementById('banner-sin-sel')
+                }));
+            } catch(e) {}
+        }
+        function loadState() {
+            try {
+                var s = JSON.parse(localStorage.getItem(SESSION_STATE_KEY) || 'null');
+                if (!s) return;
+                if (s.filter && s.filter !== 'all') {
+                    activeFilter = s.filter;
+                    document.querySelectorAll('.btn-filter').forEach(function(b) {
+                        b.classList.toggle('active', b.dataset.filter === s.filter);
+                    });
+                }
+                if (s.bannerDismissed) {
+                    var b = document.getElementById('banner-sin-sel');
+                    if (b) b.remove();
+                }
+                if (s.modalOpen && typeof photos !== 'undefined' && s.photoIndex < photos.length) {
+                    openModal(s.photoIndex);
+                } else if (s.scrollY > 0) {
+                    setTimeout(function() { window.scrollTo(0, s.scrollY); }, 100);
+                }
+            } catch(e) {}
+        }
+        window.addEventListener('beforeunload', saveState);
+        document.addEventListener('visibilitychange', function() { if (document.hidden) saveState(); });
 
         // Renderizar galería
         function renderGallery() {
@@ -1272,6 +1305,7 @@
 
                 grid.appendChild(card);
             });
+            if (!renderGallery._restored) { renderGallery._restored = true; loadState(); }
         }
 
         // Abrir modal
