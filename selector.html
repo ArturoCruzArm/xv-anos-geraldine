@@ -1297,8 +1297,9 @@
                     `<span class="badge ${cat}">${getCategoryLabel(cat)}</span>`
                 ).join('') || '';
 
+                var thumbPath = photo.path.replace('fotos-webp/', 'fotos-webp/thumb/');
                 card.innerHTML = `
-                    <img src="${photo.path}" alt="Foto ${index + 1}" loading="lazy">
+                    <img src="${thumbPath}" alt="Foto ${index + 1}" loading="lazy">
                     <div class="photo-number">#${String(index + 1).padStart(3, '0')}</div>
                     <div class="photo-badges">${badges}</div>
                 `;
