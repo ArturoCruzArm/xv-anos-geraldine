@@ -1,47 +1,63 @@
 // selector-sb-inline.js — Supabase sync para selectores inline Foro 7
 // Slug: xv-anos-geraldine | Storage key: xv_geraldine
+// v2: Compatible con trigger check_code_version (code_version + clock)
 (function () {
-    const SUPABASE_URL  = 'https://nzpujmlienzfetqcgsxz.supabase.co';
-    const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cHVqbWxpZW56ZmV0cWNnc3h6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2ODYzMzYsImV4cCI6MjA5MDI2MjMzNn0.xl3lsb-KYj5tVLKTnzpbsdEGoV9ySnswH4eyRuyEH1s';
-    const EVENTO_SLUG   = 'xv-anos-geraldine';
-    const SB_KEY        = 'xv_geraldine';
-    const SB_H = { 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON, 'Content-Type': 'application/json' };
+    var SUPABASE_URL  = 'https://nzpujmlienzfetqcgsxz.supabase.co';
+    var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56cHVqbWxpZW56ZmV0cWNnc3h6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2ODYzMzYsImV4cCI6MjA5MDI2MjMzNn0.xl3lsb-KYj5tVLKTnzpbsdEGoV9ySnswH4eyRuyEH1s';
+    var EVENTO_SLUG   = 'xv-anos-geraldine';
+    var SB_KEY        = 'xv_geraldine';
+    var SB_H = { 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON, 'Content-Type': 'application/json' };
 
-    const SESSION_KEY = 'foro7_sid';
-    let sid = localStorage.getItem(SESSION_KEY);
+    var SESSION_KEY = 'foro7_sid';
+    var sid = localStorage.getItem(SESSION_KEY);
     if (!sid) { sid = crypto.randomUUID(); localStorage.setItem(SESSION_KEY, sid); }
 
-    let eventoId   = null;
-    let sbOk       = true;
-    let _syncing   = false;
-    let _syncTimer = null;
+    var eventoId   = null;
+    var sbOk       = true;
+    var _syncing   = false;
+    var _syncTimer = null;
+
+    // Clock para el snapshot (una sola foto_index=0)
+    var CLOCK_KEY = SB_KEY + '_clock';
+    function getClock() {
+        try { return Number(localStorage.getItem(CLOCK_KEY) || '0'); } catch(e) { return 0; }
+    }
+    function bumpClock() {
+        var n = getClock() + 1;
+        try { localStorage.setItem(CLOCK_KEY, String(n)); } catch(e) {}
+        return n;
+    }
 
     async function getEventoId() {
         if (eventoId) return eventoId;
-        const r = await fetch(SUPABASE_URL + '/rest/v1/eventos?slug=eq.' + EVENTO_SLUG + '&select=id&limit=1', { headers: SB_H });
-        const rows = await r.json();
+        var r = await fetch(SUPABASE_URL + '/rest/v1/eventos?slug=eq.' + EVENTO_SLUG + '&select=id&limit=1', { headers: SB_H });
+        var rows = await r.json();
         eventoId = rows[0] ? rows[0].id : null;
         return eventoId;
     }
 
-    // Sync selections snapshot to Supabase (single row, foto_index=0, datos=full object)
+    // Sync selections snapshot to Supabase (single row, foto_index=0)
     async function sbSync(sels) {
-        if (!sbOk) return;
+        console.log('[sb] sbSync called, sbOk:', sbOk, 'sels keys:', Object.keys(sels));
+        if (!sbOk) { console.warn('[sb] sbSync skipped, sbOk=false'); return; }
         try {
-            const eid = await getEventoId();
+            var eid = await getEventoId();
             if (!eid) return;
-            await fetch(SUPABASE_URL + '/rest/v1/selecciones?evento_id=eq.' + eid, { method: 'DELETE', headers: SB_H });
-            const entries = Object.entries(sels).filter(function(e) {
+
+            var entries = Object.entries(sels).filter(function(e) {
                 var s = e[1];
                 return s && ((s.categories && s.categories.length) || s.notes);
             });
-            if (!entries.length) return;
-            // Store as individual rows keyed by filename index, plus full snapshot in datos
+
             var snapshot = {};
             entries.forEach(function(e) { snapshot[e[0]] = e[1]; });
-            await fetch(SUPABASE_URL + '/rest/v1/selecciones', {
+
+            var clock = bumpClock();
+            snapshot._sync = { clock: clock, sid: sid, updatedAt: new Date().toISOString() };
+
+            await fetch(SUPABASE_URL + '/rest/v1/selecciones?on_conflict=evento_id,foto_index', {
                 method: 'POST',
-                headers: Object.assign({}, SB_H, { 'Prefer': 'return=minimal' }),
+                headers: Object.assign({}, SB_H, { 'Prefer': 'resolution=merge-duplicates,return=minimal' }),
                 body: JSON.stringify([{
                     evento_id: eid,
                     session_id: sid,
@@ -49,29 +65,42 @@
                     impresion: false,
                     invitacion: false,
                     descartada: false,
-                    ampliacion: false,
-                    datos: snapshot
+                    ampliacion: entries.length > 0,
+                    datos: snapshot,
+                    code_version: 5
                 }])
             });
-        } catch(e) { sbOk = false; }
+        } catch(e) { console.warn('[sb] sbSync error:', e); sbOk = false; }
     }
 
     async function sbLoad(isPoll) {
         if (!sbOk) return;
         try {
-            const eid = await getEventoId();
+            var eid = await getEventoId();
             if (!eid) return;
-            const r = await fetch(
+            var r = await fetch(
                 SUPABASE_URL + '/rest/v1/selecciones?evento_id=eq.' + eid + '&select=foto_index,datos',
                 { headers: SB_H }
             );
-            const rows = await r.json();
+            var rows = await r.json();
 
             // Merge all datos snapshots from Supabase
             var sb = {};
             rows.forEach(function(row) {
                 if (row.datos && typeof row.datos === 'object') {
-                    Object.assign(sb, row.datos);
+                    Object.keys(row.datos).forEach(function(k) {
+                        if (k !== '_sync') sb[k] = row.datos[k];
+                    });
+                }
+            });
+
+            // Update clock from DB
+            rows.forEach(function(row) {
+                if (row.datos && row.datos._sync && row.datos._sync.clock) {
+                    var dbClock = Number(row.datos._sync.clock);
+                    if (dbClock > getClock()) {
+                        try { localStorage.setItem(CLOCK_KEY, String(dbClock)); } catch(e) {}
+                    }
                 }
             });
 
@@ -99,12 +128,12 @@
                 sbRegistrarVisita();
                 mostrarBanner(merged);
             }
-        } catch(e) { sbOk = false; }
+        } catch(e) { console.warn('[sb] sbLoad error:', e); sbOk = false; }
     }
 
     async function sbRegistrarVisita() {
         try {
-            const eid = await getEventoId();
+            var eid = await getEventoId();
             if (!eid) return;
             await fetch(SUPABASE_URL + '/rest/v1/visitas', {
                 method: 'POST',
@@ -138,6 +167,11 @@
             }, 600);
         }
     };
+
+    // Al volver de background, sincronizar desde BD
+    document.addEventListener('visibilitychange', function() {
+        if (!document.hidden && sbOk) sbLoad(true);
+    });
 
     document.addEventListener('DOMContentLoaded', function() {
         sbLoad(false);
