@@ -1239,6 +1239,9 @@
         const STORAGE_KEY = 'xv_geraldine';
         const SESSION_STATE_KEY = 'xv_geraldine_state';
         try { var _saved = localStorage.getItem(STORAGE_KEY); if (_saved) selections = Object.assign(selections, JSON.parse(_saved)); } catch(e) {}
+        window.applySbSelections = function(sb) {
+            selections = Object.assign({}, typeof defaultSelections !== 'undefined' ? defaultSelections : {}, sb);
+        };
         function saveSelections() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(selections)); } catch(e) {} }
         let activeFilter = 'all';
 
@@ -1535,7 +1538,7 @@
 
     <!-- Lista de fotos -->
     <script src="photos_list.js?v=1"></script>
-    <script src="default_selections.js?v=1"></script>
+    <script src="default_selections.js?v=2"></script>
 
     <!-- YouTube Player API -->
     <script>
@@ -1585,7 +1588,7 @@
         }
     </script>
     <script src="js/visitas.js?v=1"></script>
-<script src="js/selector-sb-inline.js?v=3"></script>
+<script src="js/selector-sb-inline.js?v=4"></script>
 <script src="js/foro7-footer.js?v=1"></script>
 </body>
 </html>

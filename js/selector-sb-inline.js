@@ -103,8 +103,11 @@
                 }
             });
 
+            // Si la BD no tiene selecciones, nunca borrar lo local
+            var sbVacio = !Object.keys(sb).length;
             var merged;
             if (isPoll) {
+                if (sbVacio) return;
                 merged = sb;
             } else {
                 var local = {};
@@ -119,6 +122,8 @@
             _syncing = true;
             try {
                 localStorage.setItem(SB_KEY, JSON.stringify(merged));
+                // Actualizar la variable en memoria del selector (antes solo se escribía localStorage)
+                if (typeof window.applySbSelections === 'function') window.applySbSelections(merged);
                 if (typeof renderGallery === 'function') renderGallery();
             } finally { _syncing = false; }
 
